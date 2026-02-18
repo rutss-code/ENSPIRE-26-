@@ -1,4 +1,3 @@
-
 /* --- Desktop Pill Navbar --- */
 header {
     display: flex;
@@ -384,22 +383,6 @@ nav.custom-nav a {
   transition: color 0.4s ease, text-shadow 0.4s ease;
 }
 
-/* The Golden Line */
-/* nav.custom-nav a::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 0%;
-    height: 2px;
-    background-color: #f9c802;
-    box-shadow: 
-        0 0 8px rgba(249, 200, 2, 0.8), 
-        0 0 16px rgba(249, 200, 2, 0.6);
-    transition: width 0.4s ease-in-out; 
-} */
-
 /* Hover & Active State */
 nav.custom-nav a:hover,
 nav.custom-nav a.active {
@@ -414,8 +397,6 @@ nav.custom-nav a.pass-wrapper {
   padding: 0 !important;
   margin: 0 !important;
   text-decoration: none !important;
-  /* display: inline-flex;  Let it flow or inline-block */
-  /* Remove default hover effects from this wrapper */
 }
 
 nav.custom-nav a.pass-wrapper:hover {
@@ -429,66 +410,46 @@ nav.custom-nav .nav-passes {
   align-items: center;
   justify-content: center;
   position: relative;
-  /* For pseudo-element absolute positioning */
-
   height: 5rem;
   width: 9.375rem;
-
-  /* Remove background from main container */
   background: transparent !important;
-
   border: none !important;
   box-shadow: none !important;
   outline: none !important;
-
   padding: 0;
   margin-left: 10px;
-
   color: inherit !important;
   font-size: inherit !important;
   cursor: pointer;
-
   transform: none !important;
   transition: transform 0.2s ease;
   border-radius: 0 !important;
   overflow: visible;
-  /* modification here just in case */
   appearance: none;
   -webkit-appearance: none;
 }
 
-/* Move image to pseudo-element to use mix-blend-mode if needed */
 nav.custom-nav .nav-passes::before {
   content: "";
   position: absolute;
   inset: 0;
   background: url("../Images/Logo/pass-bg.png") center/100% 100% no-repeat;
-  /* Use screen blend mode to hide black background of the image itself if present */
   mix-blend-mode: screen;
   z-index: 0;
 }
 
-/* Text styling (ONLY text moves) */
-/* Text styling (ONLY text moves) */
 nav.custom-nav .nav-passes .passes-text {
   position: relative;
   z-index: 1;
-  /* Ensure text is above the image */
   color: #000000 !important;
-  /* BLACK */
   font-size: 16px !important;
-  /* SMALLER */
   font-weight: 700 !important;
-
-  /* BOLD */
 }
 
-/* Hover effect */
 nav.custom-nav .nav-passes:hover {
   transform: scale(1.05) !important;
 }
 
-/* Smooth Expansion */
 nav.custom-nav a:hover::after,
 nav.custom-nav a.active::after {
   width: 100%;
@@ -598,22 +559,12 @@ body {
   display: none;
 }
 
-
-
 /* HERO CONTENT */
 .hero .content {
   position: relative;
   z-index: 2;
   text-align: center;
 }
-
-
-/* DARK OVERLAY */
-/* .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-} */
 
 CONTENT .content {
   position: relative;
@@ -643,8 +594,6 @@ CONTENT .content {
 .year {
   color: #ffd700;
 }
-
-*/
 
 /* TAGLINE */
 .tagline {
@@ -943,11 +892,8 @@ CONTENT .content {
 }
 
 /* ===========================
-   RESPONSIVE
+   RESPONSIVE EVENTS
 =========================== */
-
-
-
   .events-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
@@ -1178,7 +1124,7 @@ CONTENT .content {
 }
 
 /* ===============================
-   FOOTER SECTION
+   FOOTER SECTION (UPDATED)
    =============================== */
 .footer-content {
   background-color: #000;
@@ -1188,22 +1134,27 @@ CONTENT .content {
   font-family: "Open Sans", sans-serif;
 }
 
+/* Main Grid: Left (Logo+Map) and Right (Links) Side-by-Side */
 .footer-grid {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-start; /* Aligns top of logo with top of links */
   flex-wrap: wrap;
   gap: 40px;
 }
 
+/* --- Left Column: Logo, Text, Map --- */
 .footer-logo-section {
   flex: 1 1 300px;
+  display: flex;
+  flex-direction: column; /* Stacks items vertically */
+  gap: 15px;
 }
 
 .footer-logo-section img {
   width: 150px;
   border-radius: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 0; /* Gap handled by parent */
 }
 
 .footer-logo-section p {
@@ -1211,6 +1162,37 @@ CONTENT .content {
   line-height: 1.6;
 }
 
+/* Map Container Styling */
+.map-container {
+    width: 100%;
+    max-width: 350px; /* Limits map width on large screens */
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #333;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    margin-top: 5px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.map-container:hover {
+    transform: translateY(-3px);
+    border-color: #f9c802; /* Gold border on hover */
+}
+
+.map-container iframe {
+    display: block;
+    width: 100%;
+    height: 200px;
+    /* Dark map filter (optional) */
+    filter: invert(90%) hue-rotate(180deg) brightness(0.9);
+    transition: filter 0.3s ease;
+}
+
+.map-container:hover iframe {
+    filter: none; /* Full color on hover */
+}
+
+/* --- Right Column: Links --- */
 .footer-links-section {
   flex: 3;
   display: flex;
@@ -1237,7 +1219,6 @@ CONTENT .content {
 
 .footer-column a {
   text-decoration: none !important;
-  /* Override Bootstrap underline */
   color: #ddd !important;
   font-size: 16px;
   transition: color 0.25s ease;
@@ -1272,17 +1253,13 @@ CONTENT .content {
   filter: brightness(0) saturate(100%) invert(81%) sepia(68%) saturate(727%) hue-rotate(7deg) brightness(103%) contrast(103%);
 }
 
+/* Fix for Colored Icons (Twitter/X etc) */
 .social-item img[alt="Twitter"] {
-  /* Remove the harsh filter that works poorly on non-SVG/non-monochromatic PNGs */
   filter: none;
-
-  /* Ensure the hover effect doesn't break it either */
   transition: transform 0.2s ease;
-  /* Keep the transform */
 }
 
 .social-item img[alt="Twitter"]:hover {
-  /* Set the filter back to 'none' on hover if you don't want the gold color */
   filter: none;
   transform: scale(1.1);
 }
@@ -1327,7 +1304,17 @@ CONTENT .content {
     text-align: center;
   }
 
+  .footer-logo-section {
+    width: 100%;
+    align-items: center;
+  }
+  
+  .map-container {
+      margin: 0 auto; /* Center map on tablets */
+  }
+
   .footer-links-section {
+    width: 100%;
     justify-content: center;
     flex-wrap: wrap;
     gap: 40px;
@@ -1344,8 +1331,18 @@ CONTENT .content {
   }
 
   .footer-grid {
-    align-items: stretch;
-    /* Allow full width for children */
+    flex-direction: column; /* Stack everything */
+    align-items: center;
+  }
+
+  /* Map goes full width on mobile */
+  .footer-logo-section {
+      width: 100%;
+      text-align: center;
+  }
+  
+  .map-container {
+      max-width: 100%; 
   }
 
   .footer-links-section {
@@ -1357,11 +1354,8 @@ CONTENT .content {
   }
 
   .footer-column {
-    align-items: flex-start;
-    /* Left align flex items (links) */
+    align-items: flex-start; /* Re-align links to left for readability */
     text-align: left;
-    min-width: 0;
-    /* Prevent overflow */
   }
 
   .footer-column h3 {
@@ -1372,23 +1366,13 @@ CONTENT .content {
     width: 100%;
   }
 
-  .footer-column a {
-    font-size: 15px;
+  /* Social links span full width */
+  .social-links {
+    grid-column: 1 / -1;
   }
-
-  /* Social links usually look better if they span or stick to a column. 
-     Left aligning social icons too. */
+  
   .social-item {
-    justify-content: flex-start;
-  }
-
-  /* Ensure logo section is centered or looks good */
-  .footer-logo-section {
-    text-align: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+      justify-content: flex-start;
   }
 }
 
@@ -1402,22 +1386,12 @@ CONTENT .content {
   }
 
   .footer-links-section {
+    grid-template-columns: repeat(2, 1fr); /* Keep 2 cols even on small screens */
     gap: 30px;
-    /* On very small screens, maybe stack 'Contact Us' if it's too wide, 
-       but 2 columns usually fit "Home" "About" etc. 
-       Let's keep 2 columns but maybe span the Social/Contact column if needed?
-       Actually, standard 2-col grid is 1fr 1fr. 
-       If content is too wide, it will wrap. */
-    grid-template-columns: repeat(2, 1fr);
   }
-
-  /* Make social links span full width on very small screens to avoid squishing */
-  .social-links {
-    grid-column: 1 / -1;
-  }
-
+  
   .footer-column a {
-    font-size: 14px;
+      font-size: 14px;
   }
 }
 
@@ -1440,92 +1414,9 @@ iframe {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-  background: #0b0b0f;
-  color: white;
-  padding: 40px 0;
-}
-
-/* Title */
-.title {
-  text-align: center;
-  font-size: 4rem;
-  font-weight: 900;
-  color: white;
-  text-shadow: 0 0 10px red;
-  margin-bottom: 100px;
-  /* Increased margin bottom */
-}
-
-/* Grid */
-.grid {
-  width: 60%;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 50px;
-}
-
-/* Card outer frame */
-.speaker-card {
-  background: #111;
-  border-radius: 25px;
-  padding: 20px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
-}
-
-/* Inner photo box */
-.photo {
-  width: 100%;
-  height: 280px;
-  background: #e6e6e6;
-  border-radius: 18px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Bottom name box */
-.info {
-  margin-top: 15px;
-  background: black;
-  border-radius: 18px;
-  padding: 15px 10px;
-  text-align: center;
-  min-height: 70px;
-}
-
-/* Name */
-.name {
-  color: #ff4cff;
-  font-weight: bold;
-  font-size: 16px;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-}
-
-/* Role */
-.role {
-  color: white;
-  font-size: 12px;
-  line-height: 1.4;
-  opacity: 0.85;
-}
-
 /* ===========================
-   MARQUEE ANIMATION STYLES
+   MARQUEE & SPONSORS ANIMATIONS
    =========================== */
-
-/* Speakers Marquee animations removed in favor of 3D Carousel */
-
-/* Sponsors Marquee Container */
 .marquee-container-sponsors {
   width: 100%;
   overflow: hidden;
@@ -1556,8 +1447,6 @@ body {
   animation-play-state: paused;
 }
 
-/* Scroll Animation Keyframes for Sponsors */
-
 @keyframes scrollSponsors {
   0% {
     transform: translateX(0);
@@ -1568,16 +1457,12 @@ body {
   }
 }
 
-/* Ensure speaker and sponsor cards maintain fixed width in marquee */
-
-
 .marquee-track-sponsors .sponsor-card {
   flex: 0 0 auto;
   width: 260px;
   height: 300px;
 }
 
-/* Optional: Add smooth transition effect on pause */
 .marquee-track-sponsors {
   transition: animation-play-state 0.3s ease;
 }
@@ -1602,23 +1487,13 @@ body {
   }
 }
 
-/* Dark overlay for readability */
-/*.space-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  z-index: 0;
-}/*
-
-/* Ensure content stays above overlay */
 .space-bg>* {
   position: relative;
   z-index: 1;
 }
 
 /* ===========================
-   ADDED RESPONSIVE STYLES
+   ADDED RESPONSIVE STYLES (General)
    =========================== */
 
 @media (max-width: 768px) {
@@ -1640,7 +1515,6 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     padding-top: 5rem;
-    /* Space for fixed navbar */
   }
 
   .hero-video {
@@ -1692,41 +1566,6 @@ body {
     margin: 0 auto;
   }
 
-  /* Speakers Section */
-  .carousel-container {
-    margin-top: 2rem;
-    height: 280px !important;
-    /* Reduced height for the section */
-  }
-
-  .speaker-card {
-    height: auto !important;
-    padding: 10px !important;
-    /* Compact padding */
-    width: 160px !important;
-  }
-
-  .photo {
-    height: 160px !important;
-    /* Smaller photo area */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .info {
-    padding: 8px 5px !important;
-    min-height: 50px !important;
-  }
-
-  .name {
-    font-size: 13px !important;
-  }
-
-  .role {
-    font-size: 10px !important;
-  }
-
   /* Sponsors Section */
   .sponsors-title {
     padding-top: 3rem !important;
@@ -1758,7 +1597,6 @@ body {
   /* Intro Video */
   #intro-video {
     object-fit: contain !important;
-    /* Ensure entire video is visible */
     background: black;
   }
 }
@@ -1782,14 +1620,6 @@ body {
   .header-content {
     padding: 1rem;
     height: auto;
-  }
-
-  .footer-content {
-    padding: 2rem 1rem;
-  }
-
-  .footer-links-section {
-    gap: 1.5rem;
   }
 }
 
@@ -2000,16 +1830,12 @@ body {
     RESPONSIVE - INTRO ANIMATIONS
    ============================== */
 
-/* Tablet and smaller devices */
 @media (max-width: 768px) {
-
-  /* Adjust galaxy stars for smaller screens */
   .galaxy-star {
     width: 3px !important;
     height: 3px !important;
   }
 
-  /* Reduce blur intensity on mobile for better performance */
   #intro-video.dust-effect {
     filter: blur(8px) contrast(1.3) grayscale(1);
   }
@@ -2028,7 +1854,6 @@ body {
     }
   }
 
-  /* Optimize galaxy glow for mobile */
   #intro-overlay.galaxy-arrival::before {
     background: radial-gradient(circle at center,
         rgba(100, 150, 255, 0.25) 0%,
@@ -2036,7 +1861,6 @@ body {
         transparent 55%);
   }
 
-  /* Reduce blur on shining reveal for better mobile performance */
   @keyframes shiningReveal {
     0% {
       filter: brightness(4) blur(15px) contrast(1.8);
@@ -2062,16 +1886,12 @@ body {
   }
 }
 
-/* Small mobile devices */
 @media (max-width: 480px) {
-
-  /* Further reduce star size for very small screens */
   .galaxy-star {
     width: 2px !important;
     height: 2px !important;
   }
 
-  /* Lighter effects for small mobile */
   #intro-video.dust-effect {
     filter: blur(6px) contrast(1.2) grayscale(1);
   }
@@ -2090,7 +1910,6 @@ body {
     }
   }
 
-  /* Subtle glow for small screens */
   #intro-overlay.galaxy-arrival::before {
     background: radial-gradient(circle at center,
         rgba(100, 150, 255, 0.2) 0%,
@@ -2098,7 +1917,6 @@ body {
         transparent 50%);
   }
 
-  /* Minimal blur for small devices */
   @keyframes shiningReveal {
     0% {
       filter: brightness(3) blur(10px) contrast(1.5);
@@ -2128,10 +1946,7 @@ body {
     RESPONSIVE - ALL IMAGES
    ============================== */
 
-/* Tablet devices (1024px and below) */
 @media (max-width: 1024px) {
-
-  /* Event card images */
   .card-front img {
     width: 100% !important;
     height: auto !important;
@@ -2139,7 +1954,6 @@ body {
     object-fit: cover;
   }
 
-  /* Speaker photos */
   .speaker-card .photo img {
     width: 100% !important;
     height: auto !important;
@@ -2148,7 +1962,6 @@ body {
     object-fit: cover;
   }
 
-  /* Sponsor logos */
   .sponsor-card .logo img,
   .sponsor-card>img {
     max-width: 75% !important;
@@ -2157,23 +1970,18 @@ body {
     height: auto !important;
   }
 
-  /* Footer logo */
   .footer-logo-section img {
     max-width: 180px !important;
     height: auto !important;
   }
 
-  /* Footer social icons */
   .social-item img {
     width: 20px !important;
     height: 20px !important;
   }
 }
 
-/* Mobile devices (768px and below) */
 @media (max-width: 768px) {
-
-  /* Header logo */
   .logo-section img {
     height: 50px !important;
     width: auto !important;
@@ -2184,7 +1992,6 @@ body {
     transform: scale(1.2) !important;
   }
 
-  /* Event card images */
   .card-front img {
     width: 100% !important;
     height: auto !important;
@@ -2193,7 +2000,6 @@ body {
     object-fit: cover;
   }
 
-  /* Speaker photos */
   .speaker-card .photo img {
     width: 100% !important;
     height: auto !important;
@@ -2202,7 +2008,6 @@ body {
     object-fit: cover;
   }
 
-  /* Sponsor logos */
   .sponsor-card .logo img,
   .sponsor-card>img {
     max-width: 70% !important;
@@ -2211,7 +2016,6 @@ body {
     height: auto !important;
   }
 
-  /* Footer logo */
   .footer-logo-section img {
     max-width: 150px !important;
     height: auto !important;
@@ -2219,13 +2023,11 @@ body {
     display: block;
   }
 
-  /* Footer social icons */
   .social-item img {
     width: 18px !important;
     height: 18px !important;
   }
 
-  /* Ensure no margins/padding on body/html to remove black borders */
   body,
   html {
     margin: 0 !important;
@@ -2234,15 +2036,12 @@ body {
     width: 100% !important;
   }
 
-  /* Remove the spacer on mobile to let hero start at top */
   header {
     height: 0 !important;
   }
 
-  /* Force hero to occupy exact viewport dimensions */
   .hero {
     height: 100dvh !important;
-    /* Use dynamic height for mobile */
     width: 100% !important;
     position: relative !important;
     overflow: hidden !important;
@@ -2254,7 +2053,6 @@ body {
     align-items: center !important;
   }
 
-  /* Force video to cover every pixel and show the bottom content */
   .hero-video {
     position: absolute !important;
     top: 0 !important;
@@ -2263,7 +2061,6 @@ body {
     height: 100% !important;
     object-fit: cover !important;
     object-position: center bottom !important;
-    /* Ensures "ENSPIRE 26" at the bottom is visible */
     z-index: 0 !important;
     transform: none !important;
   }
@@ -2276,17 +2073,14 @@ body {
     display: block !important;
   }
 
-  /* Reposition button below the enspire text */
   .hero .btn {
     margin: 0 0 15px 0 !important;
-    /* Move it to the very bottom edge */
     position: relative !important;
     z-index: 10 !important;
     padding: 10px 20px !important;
     font-size: 13px !important;
   }
 
-  /* Intro video */
   #intro-video {
     width: 100%;
     height: 100%;
@@ -2294,10 +2088,7 @@ body {
   }
 }
 
-/* Small mobile devices (480px and below) */
 @media (max-width: 480px) {
-
-  /* Header logo */
   .logo-section img {
     height: 40px !important;
     width: auto !important;
@@ -2308,7 +2099,6 @@ body {
     transform: scale(1.1) !important;
   }
 
-  /* Event card adjustments */
   .event-card {
     height: 300px !important;
     width: 280px !important;
@@ -2329,14 +2119,12 @@ body {
     font-size: 0.8rem !important;
   }
 
-  /* Speaker photos */
   .speaker-card .photo img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
   }
 
-  /* Sponsor logos */
   .sponsor-card .logo img,
   .sponsor-card>img {
     max-width: 65% !important;
@@ -2345,7 +2133,6 @@ body {
     height: auto !important;
   }
 
-  /* Footer logo */
   .footer-logo-section img {
     max-width: 120px !important;
     height: auto !important;
@@ -2353,29 +2140,23 @@ body {
     display: block;
   }
 
-  /* Footer social icons */
   .social-item img {
     width: 16px !important;
     height: 16px !important;
   }
 
-  /* Ensure all images maintain aspect ratio */
   img {
     max-width: 100%;
     height: auto;
   }
 }
 
-/* Extra small devices (360px and below) */
 @media (max-width: 360px) {
-
-  /* Header logo */
   .logo-section img {
     height: 35px !important;
     width: auto !important;
   }
 
-  /* Event card adjustments */
   .event-card {
     height: 280px !important;
     width: 260px !important;
@@ -2388,7 +2169,6 @@ body {
     object-fit: cover !important;
   }
 
-  /* Speaker photos */
   .speaker-card .photo img {
     width: 100% !important;
     height: auto !important;
@@ -2396,7 +2176,6 @@ body {
     max-height: 180px;
   }
 
-  /* Sponsor logos */
   .sponsor-card {
     width: 120px !important;
     height: 150px !important;
@@ -2408,25 +2187,21 @@ body {
     max-height: 60px !important;
   }
 
-  /* Footer logo */
   .footer-logo-section img {
     max-width: 100px !important;
     height: auto !important;
   }
 
-  /* Footer social icons */
   .social-item img {
     width: 14px !important;
     height: 14px !important;
   }
 }
 
-/* Mobile Center Image */
 .mobile-center-image {
   display: none;
 }
 
-/* Desktop Center Image */
 .desktop-center-image {
   display: block;
   position: absolute;
@@ -2438,7 +2213,6 @@ body {
   width: auto;
   height: auto;
   z-index: 1;
-  /* Above video (0), below content (2) */
   pointer-events: none;
 }
 
@@ -2458,126 +2232,6 @@ body {
     width: auto;
     height: auto;
     z-index: 1;
-    /* Above video (0), below content (2) */
     pointer-events: none;
-  }
-}
-
-/* ===========================
-   ALUMNI SECTION STYLING
-=========================== */
-
-.alumni-section {
-  padding: 3rem 2rem 5rem 2rem;
-  background: transparent;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Alumni Grid */
-.alumni-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-/* Alumni Card */
-.alumni-card {
-  position: relative;
-  border-radius: 15px;
-  overflow: hidden;
-  aspect-ratio: 3/4;
-  cursor: pointer;
-  box-shadow: 0 5px 5px rgb(255, 255, 255);
-  border: 2px solid rgb(255, 255, 255);
-  transition: all 0.4s ease;
-}
-
-.alumni-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgb(255, 255, 255);
-  border-color: rgb(255, 255, 255);
-}
-
-/* Alumni Image */
-.alumni-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: all 0.4s ease;
-}
-
-.alumni-card:hover img {
-  transform: scale(1.1);
-  filter: brightness(0.6);
-}
-
-/* Alumni Overlay */
-.alumni-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
-  padding: 2rem 1.5rem;
-  transform: translateY(100%);
-  transition: transform 0.4s ease;
-}
-
-.alumni-card:hover .alumni-overlay {
-  transform: translateY(0);
-}
-
-.alumni-overlay h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-}
-
-.alumni-overlay p {
-  font-size: 1rem;
-  color: #e0e0e0;
-  margin: 0;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .alumni-section {
-    padding: 2rem 1rem 3rem 1rem;
-  }
-
-  .alumni-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .alumni-overlay h3 {
-    font-size: 1.2rem;
-  }
-
-  .alumni-overlay p {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .alumni-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .alumni-overlay {
-    padding: 1rem;
-  }
-
-  .alumni-overlay h3 {
-    font-size: 1rem;
-  }
-
-  .alumni-overlay p {
-    font-size: 0.8rem;
   }
 }
